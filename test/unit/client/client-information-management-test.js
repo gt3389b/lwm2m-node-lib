@@ -47,6 +47,8 @@ describe('Client-side information management', function() {
             localhost = '127.0.0.1';
         }
 
+        lwm2mClient.init(config);
+
         lwm2mServer.start(config.server, function (error, srvInfo) {
             testInfo.serverInfo = srvInfo;
 
@@ -339,9 +341,7 @@ describe('Client-side information management', function() {
         });
 
         afterEach(function(done) {
-            async.series([
-                lwm2mClient.registry.unsetResource(obj.uri, obj.resource, done)
-            ], done);
+            lwm2mClient.registry.unsetResource(obj.uri, obj.resource, done);
         });
 
         it('should update the value when the specified time lapse has passed', function(done) {
