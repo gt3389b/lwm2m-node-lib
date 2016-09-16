@@ -27,8 +27,8 @@
   },
   "dependencies": {
     "async": "1.5.2",
-    "coap": "git+ssh://git@github.com/CasperTech/node-coap.git",
-    "coap-cli": "0.4.0",
+    "coap": "*",
+    "coap-cli": "*",
     "command-node": "0.1.1",
     "logops": "0.5.0",
     "mongodb": "2.1.7",
