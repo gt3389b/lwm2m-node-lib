@@ -19,6 +19,7 @@
     "node": ">=0.10.8"
   },
   "scripts": {
+    "start": "node ./bin/iotagent-lwm2m-autolaunch-server.js",
     "test": "grunt"
   },
   "bin": {
