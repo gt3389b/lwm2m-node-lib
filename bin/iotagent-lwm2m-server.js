@@ -41,9 +41,9 @@ function handleResult(message) {
     };
 }
 
-function registrationHandler(endpoint, lifetime, version, binding, payload, callback) {
+function registrationHandler(device, lifetime, version, binding, payload, callback) {
     console.log('\nDevice registration:\n----------------------------\n');
-    console.log('Endpoint name: %s\nLifetime: %s\nBinding: %s', endpoint, lifetime, binding);
+    console.log('Endpoint name: %s\nLifetime: %s\nBinding: %s', device.name, lifetime, binding);
     clUtils.prompt();
     callback();
 }
