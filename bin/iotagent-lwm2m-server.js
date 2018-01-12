@@ -134,11 +134,12 @@ function execute(commands) {
 
 
 function discover(commands) {
-    lwm2mServer.discover(commands[0], commands[1], commands[2], commands[3], function handleDiscover(error, payload) {
+    lwm2mServer.discover(commands[0], commands[1], commands[2], commands[3], function handleDiscover(error, response) {
         if (error) {
             clUtils.handleError(error);
         } else {
             console.log('\nResource attributes:\n----------------------------\n');
+            payload = response.payload.toString();
             console.log('%s', payload.substr(payload.indexOf(';')).replace(/;/g, '\n').replace('=', ' = '));
             clUtils.prompt();
         }
