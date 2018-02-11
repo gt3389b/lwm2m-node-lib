@@ -4,17 +4,17 @@ var config = {};
 //--------------------------------------------------
 config.server = {
     port: 5683,                         // Port where the server will be listening
-    lifetimeCheckInterval: 1000,        // Minimum interval between lifetime checks in ms
+    lifetimeCheckInterval: 120000,        // Minimum interval between lifetime checks in ms
     udpWindow: 100,
     defaultType: 'Device',
-    logLevel: 'FATAL',
-    ipProtocol: 'udp4',
-    serverProtocol: 'udp4',
+    logLevel: 'DEBUG',
+    ipProtocol: 'udp6',
+    serverProtocol: 'udp6',
     deviceRegistry: {
         type: 'mongodb',
         host: 'localhost',
         port: '27017',
-        db: 'lwtm2m'
+        db: 'lwm2m'
     },
     formats: [
         {
@@ -46,8 +46,8 @@ config.client = {
     observe: {
         period: 3000
     },
-    ipProtocol: 'udp4',
-    serverProtocol: 'udp4',
+    ipProtocol: 'udp6',
+    serverProtocol: 'udp6',
     formats: [
         {
             name: 'lightweightm2m/text',

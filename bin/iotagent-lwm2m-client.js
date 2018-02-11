@@ -48,7 +48,8 @@ function handleObjectFunction(error, result) {
     if (error) {
         clUtils.handleError(error);
     } else {
-        printObject(result);
+       console.log(" Success ");
+        //printObject(result);
     }
 }
 
@@ -135,15 +136,22 @@ function connect(command) {
         url = command[2];
     }
 
-    lwm2mClient.register(command[0], command[1], command[3], command[2], function (error, deviceInfo) {
-        if (error) {
-            clUtils.handleError(error);
-        } else {
-            globalDeviceInfo = deviceInfo;
-            setHandlers(deviceInfo);
-            console.log('\nConnected:\n--------------------------------\nDevice location: %s', deviceInfo.location);
-            clUtils.prompt();
-        }
+    lwm2mClient.register(command[0], command[1], command[3], command[2], command[4], function (error, deviceInfo) {
+       if (error) {
+          clUtils.handleError(error);
+       } else {
+          globalDeviceInfo = deviceInfo;
+          setHandlers(deviceInfo);
+          console.log('\nConnected:\n--------------------------------\nDevice location: %s', deviceInfo.location);
+
+//          if(deviceInfo.binding.indexOf('Q')>=0) {
+             var UpdateRegistration = setInterval(function () {
+                updateConnection();
+             }, parseInt((config.client.lifetime)-5) * 1000);
+//          }
+
+          clUtils.prompt();
+       }
     });
 }
 
@@ -205,6 +213,11 @@ var commands = {
         description: '\tSet the value for a resource. If the resource does not exist, it is created.',
         handler: set
     },
+    'setExec': {
+        parameters: ['objectUri', 'resourceId' ],
+        description: '\tSet the value for a resource. If the resource does not exist, it is created.',
+        handler: set
+    },
     'unset': {
         parameters: ['objectUri', 'resourceId'],
         description: '\tRemoves a resource from the selected object.',
@@ -216,7 +229,7 @@ var commands = {
         handler: list
     },
     'connect': {
-        parameters: ['host', 'port', 'endpointName', 'url'],
+        parameters: ['host', 'port', 'endpointName', 'url', 'binding'],
         description: '\tConnect to the server in the selected host and port, using the selected endpointName.',
         handler: connect
     },
@@ -242,6 +255,8 @@ var commands = {
     }
 };
 
-lwm2mClient.init(require('../config'));
+lwm2mClient.init(config);
+
+
 
 clUtils.initialize(commands, 'LWM2M-Client> ');

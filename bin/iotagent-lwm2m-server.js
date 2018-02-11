@@ -41,16 +41,17 @@ function handleResult(message) {
     };
 }
 
-function registrationHandler(device, lifetime, version, binding, payload, callback) {
+function registrationHandler(endpoint, lifetime, version, binding, payload, callback) {
     console.log('\nDevice registration:\n----------------------------\n');
-    console.log('Endpoint name: %s\nLifetime: %s\nBinding: %s', device.name, lifetime, binding);
+    console.log('Endpoint name: %s\nLifetime: %s\nBinding: %s', endpoint, lifetime, binding);
+    console.log(payload);
     clUtils.prompt();
     callback();
 }
 
 function unregistrationHandler(device, callback) {
     console.log('\nDevice unregistration:\n----------------------------\n');
-    console.log('Device location: %s', device);
+    console.log('Device location: %s', str(device));
     clUtils.prompt();
     callback();
 }
@@ -134,12 +135,11 @@ function execute(commands) {
 
 
 function discover(commands) {
-    lwm2mServer.discover(commands[0], commands[1], commands[2], commands[3], function handleDiscover(error, response) {
+    lwm2mServer.discover(commands[0], commands[1], commands[2], commands[3], function handleDiscover(error, payload) {
         if (error) {
             clUtils.handleError(error);
         } else {
             console.log('\nResource attributes:\n----------------------------\n');
-            payload = response.payload.toString();
             console.log('%s', payload.substr(payload.indexOf(';')).replace(/;/g, '\n').replace('=', ' = '));
             clUtils.prompt();
         }
