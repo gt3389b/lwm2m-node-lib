@@ -8,8 +8,8 @@ config.server = {
     udpWindow: 100,
     defaultType: 'Device',
     logLevel: 'DEBUG',
-    ipProtocol: 'udp6',
-    serverProtocol: 'udp6',
+    ipProtocol: 'udp4',
+    serverProtocol: 'udp4',
     formats: [
         {
             name: 'application-vnd-oma-lwm2m/text',
@@ -34,14 +34,14 @@ config.server = {
 // Configuration of the LWTM2M Client
 //--------------------------------------------------
 config.client = {
-    lifetime: '60',
+    lifetime: '20',
     version: '1.0',
     logLevel: 'DEBUG',
     observe: {
         period: 30000
     },
-    ipProtocol: 'udp6',
-    serverProtocol: 'udp6',
+    ipProtocol: 'udp4',
+    serverProtocol: 'udp4',
     formats: [
         {
             name: 'lightweightm2m/text',

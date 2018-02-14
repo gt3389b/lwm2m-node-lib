@@ -3,13 +3,13 @@ var config = {};
 // Configuration of the LWTM2M Server
 //--------------------------------------------------
 config.server = {
-    port: 5683,                         // Port where the server will be listening
+    port: 5684,                         // Port where the server will be listening
     lifetimeCheckInterval: 120000,        // Minimum interval between lifetime checks in ms
     udpWindow: 100,
     defaultType: 'Device',
     logLevel: 'DEBUG',
-    ipProtocol: 'udp6',
-    serverProtocol: 'udp6',
+    ipProtocol: 'udp4',
+    serverProtocol: 'udp4',
     deviceRegistry: {
         type: 'mongodb',
         host: 'localhost',
@@ -46,8 +46,8 @@ config.client = {
     observe: {
         period: 3000
     },
-    ipProtocol: 'udp6',
-    serverProtocol: 'udp6',
+    ipProtocol: 'udp4',
+    serverProtocol: 'udp4',
     formats: [
         {
             name: 'lightweightm2m/text',
